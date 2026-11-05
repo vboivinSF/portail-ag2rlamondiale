@@ -264,8 +264,20 @@
     const firstName = sessionStorage.getItem("firstName");
     const lastName = sessionStorage.getItem("lastName");
 
+    // Logins pour lesquels la bannière personnalisée remplace l'emplacement "cell perso"
+    const PERSO_LOGINS = ["claire.martin@gmail.com"];
+
     window.onload = function() {
       document.getElementById("user").innerHTML = firstName + "&nbsp;" + lastName;
+
+      const currentLogin = (login || "").trim().toLowerCase();
+      if (PERSO_LOGINS.includes(currentLogin)) {
+        const cell = document.querySelector(".cell.perso");
+        const banner = document.getElementById("banniere-per");
+        if (cell && banner) {
+          cell.replaceWith(banner.content.cloneNode(true));
+        }
+      }
     };
     function logout () {
       sessionStorage.removeItem('login');
@@ -352,6 +364,83 @@
     </div>
 
   </div>
+
+  <!-- Bannière PER affichée à la place de "cell perso" pour les logins de PERSO_LOGINS -->
+  <template id="banniere-per">
+    <style>
+    .sfdcep-banner {
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background: #34BFAD;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow: hidden;
+    }
+
+    .sfdcep-banner-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .sfdcep-banner-content {
+        padding: 32px 24px 40px;
+        text-align: center;
+    }
+
+    .sfdcep-banner-header {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #381A0A;
+        margin: 0 0 16px;
+    }
+
+    .sfdcep-banner-subheader {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #381A0A;
+        max-width: 720px;
+        margin: 0 auto 32px;
+    }
+
+    .sfdcep-banner-cta a {
+        display: inline-block;
+        padding: 14px 32px;
+        background-color: #FFFFFF;
+        border: 2px solid #0052FF;
+        border-radius: 33px;
+        color: #0052FF;
+        font-size: 18px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color .15s, color .15s;
+    }
+
+    .sfdcep-banner-cta a:hover,
+    .sfdcep-banner-cta a:focus {
+        background-color: #0052FF;
+        color: #FFFFFF;
+    }
+
+    @media (max-width: 600px) {
+        .sfdcep-banner-header { font-size: 24px; }
+        .sfdcep-banner-subheader { font-size: 16px; }
+    }
+    </style>
+    <div class="sfdcep-banner">
+        <img class="sfdcep-banner-image" src="https://vboivinsf.github.io/portail-ag2rlamondiale/images/Banniere_retraite.jpg" alt="">
+        <div class="sfdcep-banner-content">
+            <div class="sfdcep-banner-header">Claire, et si votre retraite vous faisait payer moins d’impôts ?</div>
+            <div class="sfdcep-banner-subheader">Le Plan d’Épargne Retraite AG2R La Mondiale vous fait économiser dès cette année tout en préparant demain.</div>
+            <div class="sfdcep-banner-cta">
+                <a href="https://www.ag2rlamondiale.fr/tous-nos-services/service-simulateur-retraite">Calculer mon économie</a>
+            </div>
+        </div>
+    </div>
+  </template>
 
 </body>
 </html>
