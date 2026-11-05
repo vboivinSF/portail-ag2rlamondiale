@@ -58,6 +58,15 @@
                     // Redirige vers la page de destination
                     window.location.href = "home.html";
                     break;
+                case "jean.dupont@outlook.com":
+                    // Sauvegarde temporaire
+                    sessionStorage.setItem("login", loginValue);
+                    sessionStorage.setItem("firstName", "Jean");
+                    sessionStorage.setItem("lastName", "Dupont");
+
+                    // Redirige vers la page de destination
+                    window.location.href = "home.html";
+                    break;
                 case "admin@ag2rlamondiale.fr":
                     // Sauvegarde temporaire
                     sessionStorage.setItem("login", loginValue);

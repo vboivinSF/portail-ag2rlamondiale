@@ -264,16 +264,20 @@
     const firstName = sessionStorage.getItem("firstName");
     const lastName = sessionStorage.getItem("lastName");
 
-    // Logins pour lesquels la bannière personnalisée remplace l'emplacement "cell perso"
-    const PERSO_LOGINS = ["claire.martin@gmail.com"];
+    // Login -> id du <template> de bannière qui remplace l'emplacement "cell perso"
+    const PERSO_BANNERS = {
+      "claire.martin@gmail.com": "banniere-per",
+      "jean.dupont@outlook.com": "banniere-standard"
+    };
 
     window.onload = function() {
       document.getElementById("user").innerHTML = firstName + "&nbsp;" + lastName;
 
       const currentLogin = (login || "").trim().toLowerCase();
-      if (PERSO_LOGINS.includes(currentLogin)) {
+      const templateId = PERSO_BANNERS[currentLogin];
+      if (templateId) {
         const cell = document.querySelector(".cell.perso");
-        const banner = document.getElementById("banniere-per");
+        const banner = document.getElementById(templateId);
         if (cell && banner) {
           cell.replaceWith(banner.content.cloneNode(true));
         }
@@ -365,8 +369,7 @@
 
   </div>
 
-  <!-- Bannière PER affichée à la place de "cell perso" pour les logins de PERSO_LOGINS -->
-  <template id="banniere-per">
+  <!-- Styles communs aux bannières personnalisées -->
     <style>
     .sfdcep-banner {
         margin: 0 auto;
@@ -430,6 +433,9 @@
         .sfdcep-banner-subheader { font-size: 16px; }
     }
     </style>
+
+  <!-- Bannière PER (claire.martin@gmail.com) -->
+  <template id="banniere-per">
     <div class="sfdcep-banner">
         <img class="sfdcep-banner-image" src="https://vboivinsf.github.io/portail-ag2rlamondiale/images/Banniere_retraite.jpg" alt="">
         <div class="sfdcep-banner-content">
@@ -437,6 +443,20 @@
             <div class="sfdcep-banner-subheader">Le Plan d’Épargne Retraite AG2R La Mondiale vous fait économiser dès cette année tout en préparant demain.</div>
             <div class="sfdcep-banner-cta">
                 <a href="https://www.ag2rlamondiale.fr/tous-nos-services/service-simulateur-retraite">Calculer mon économie</a>
+            </div>
+        </div>
+    </div>
+  </template>
+
+  <!-- Bannière standard (jean.dupont@outlook.com) -->
+  <template id="banniere-standard">
+    <div class="sfdcep-banner">
+        <img class="sfdcep-banner-image" src="https://www.ag2rlamondiale.fr/files/live/sites/portail/files/images/683par343_CONSEIL_PRODUIT/img_home1.jpg" alt="">
+        <div class="sfdcep-banner-content">
+            <div class="sfdcep-banner-header">À vos côtés à chaque étape de votre vie</div>
+            <div class="sfdcep-banner-subheader">Santé, prévoyance, épargne et retraite : AG2R La Mondiale vous protège, vous et vos proches, avec des solutions adaptées à chaque moment de votre parcours.</div>
+            <div class="sfdcep-banner-cta">
+                <a href="https://www.ag2rlamondiale.fr">Découvrir nos solutions</a>
             </div>
         </div>
     </div>
