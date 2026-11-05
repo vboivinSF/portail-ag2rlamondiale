@@ -49,18 +49,21 @@
             let errorDiv = document.getElementById("errorMessage");
 
             switch (loginValue) {
-                case "cmartin@gmail.com":
+                case "claire.martin@gmail.com":
                     // Sauvegarde temporaire
                     sessionStorage.setItem("login", loginValue);
                     sessionStorage.setItem("firstName", "Claire");
                     sessionStorage.setItem("lastName", "Martin");
-                    sessionStorage.setItem("PER", "0");
-                    sessionStorage.setItem("age", "44");
 
                     // Redirige vers la page de destination
                     window.location.href = "home.html";
                     break;
                 case "admin@ag2rlamondiale.fr":
+                    // Sauvegarde temporaire
+                    sessionStorage.setItem("login", loginValue);
+                    sessionStorage.setItem("firstName", "Admin");
+                    sessionStorage.setItem("lastName", "Admin");
+
                     // Redirige vers la page de destination
                     window.location.href = "home.html";
                     break;
