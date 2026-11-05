@@ -49,23 +49,13 @@
             let errorDiv = document.getElementById("errorMessage");
 
             switch (loginValue) {
-                case "sgrosjean@gmail.com":
+                case "cmartin@gmail.com":
                     // Sauvegarde temporaire
                     sessionStorage.setItem("login", loginValue);
-                    sessionStorage.setItem("firstName", "Sophie");
-                    sessionStorage.setItem("lastName", "Grosjean");
-                    sessionStorage.setItem("ambassadeur", "0");
-                    sessionStorage.setItem("age", "30");
-
-                    // Redirige vers la page de destination
-                    window.location.href = "home.html";
-                    break;
-                case "jmprevost@yahoo.fr":
-                    sessionStorage.setItem("login", loginValue);
-                    sessionStorage.setItem("firstName", "Jean-Marc");
-                    sessionStorage.setItem("lastName", "Prevost");
-                    sessionStorage.setItem("ambassadeur", "1");
-                    sessionStorage.setItem("age", "59");
+                    sessionStorage.setItem("firstName", "Claire");
+                    sessionStorage.setItem("lastName", "Martin");
+                    sessionStorage.setItem("PER", "0");
+                    sessionStorage.setItem("age", "44");
 
                     // Redirige vers la page de destination
                     window.location.href = "home.html";
