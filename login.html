@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page de connexion</title>
+  <link rel="icon" type="image/png" href="images/ag2r_favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="text/javascript" src="https://cdn.c360a.salesforce.com/beacon/c360a/cbf9ea20-cd25-48d4-9a9c-2bad8ca9e94c/scripts/c360a.min.js"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  
+  <div class="w-full max-w-md bg-white shadow-lg rounded-2xl overflow-hidden">
+    
+    <!-- Première section -->
+    <div class="flex flex-col items-center p-6 text-center">
+      <img src="images/Logo-AG2R.svg" alt="Illustration" class="mb-4 rounded-lg">
+      <h2 class="text-xl font-bold text-gray-800">Connexion à votre espace client</h2>
+    </div>
+
+    <!-- Deuxième section -->
+    <div class="p-6">
+      <form id="loginForm" class="flex flex-col space-y-4">
+        <!-- Login -->
+        <div>
+          <label for="login" class="block text-sm font-medium text-gray-700">Identifiant</label>
+          <input type="text" id="login" name="login" required
+                 class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2">
+        </div>
+        <!-- Mot de passe -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+          <input type="password" id="password" name="password" required
+                 class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2">
+        </div>
+        <!-- Zone de message d’erreur (cachée par défaut) -->
+        <div id="errorMessage" class="hidden text-red-600 text-sm font-medium bg-red-100 p-2 rounded-lg"></div>
+        <!-- Bouton -->
+        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-xl shadow hover:bg-blue-700 transition">
+          Se connecter
+        </button>
+      </form>
+    </div>
+  </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault(); // empêche le rechargement
+            let loginValue = document.getElementById("login").value;
+            let errorDiv = document.getElementById("errorMessage");
+
+            switch (loginValue) {
+                case "sgrosjean@gmail.com":
+                    // Sauvegarde temporaire
+                    sessionStorage.setItem("login", loginValue);
+                    sessionStorage.setItem("firstName", "Sophie");
+                    sessionStorage.setItem("lastName", "Grosjean");
+                    sessionStorage.setItem("ambassadeur", "0");
+                    sessionStorage.setItem("age", "30");
+
+                    // Redirige vers la page de destination
+                    window.location.href = "home.html";
+                    break;
+                case "jmprevost@yahoo.fr":
+                    sessionStorage.setItem("login", loginValue);
+                    sessionStorage.setItem("firstName", "Jean-Marc");
+                    sessionStorage.setItem("lastName", "Prevost");
+                    sessionStorage.setItem("ambassadeur", "1");
+                    sessionStorage.setItem("age", "59");
+
+                    // Redirige vers la page de destination
+                    window.location.href = "home.html";
+                    break;
+                case "admin@ag2rlamondiale.fr":
+                    // Redirige vers la page de destination
+                    window.location.href = "home.html";
+                    break;
+                default:
+                    errorDiv.textContent = "Identifiant ou mot de passe incorrect.";
+                    errorDiv.classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+</html>

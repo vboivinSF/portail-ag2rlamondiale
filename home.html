@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Espace Client AG2R La Mondiale</title>
+  <link rel="icon" type="image/png" href="images/ag2r_favicon.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #eaeaea; /* fond gris clair */
+      padding: 40px 0; /* espace en haut et en bas */
+    }
+
+    /* Conteneur principal */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white; /* fond blanc pour le contenu */
+      box-shadow: 0 0 15px rgba(0,0,0,0.15); /* légère ombre */
+      border-radius: 8px; /* arrondis doux pour plus moderne */
+    }
+
+    /* Section 1 */
+    .header {
+      display: grid;
+      grid-template-columns: 200px 1fr auto auto;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .header img {
+      width: 200px;
+      height: auto;
+    }
+
+    .header div {
+        font-size: 1.5rem; /* texte plus grand */
+        font-weight: bold;
+        margin-left: 30px;   /* espace entre l’image et le texte */
+    }
+
+    .header button.user {
+      background-color: white;
+      color: #391909;
+      border: 1px solid #42e8ff;
+      border-radius: 5px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .header button.user:hover {
+      background-color: #42e8ff;
+      color: white;
+    }
+/*
+    .header .logout {
+      display:inline-block;
+      padding:10px 20px;
+      border:1px solid #333;
+      border-radius:8px;
+      background:#eee;
+      text-decoration:none;
+    }
+*/
+    .header .logout {
+        width: 31px;  /* taille de l’icône */
+        height: 31px;
+        cursor: pointer;
+    }
+
+    /* Section 2 */
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.5fr 1fr;
+      border: 1px solid #391909;
+      margin-bottom: 20px;
+    }
+
+    .menu div {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .menu div.inactive:hover {
+        background-color: darkblue; /* fond foncé au survol */
+        color: white;               /* texte blanc */
+        cursor: pointer;            /* curseur pointer pour indiquer clic possible */
+    }
+
+    .menu div.active {
+      background-color: darkblue;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;            /* curseur pointer pour indiquer clic possible */
+    }
+
+    /* Section 3 */
+    .content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid white;
+      gap: 10px;
+    }
+
+    .content .cell {
+      border: 1px solid #391909;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .content .cell.perso {
+        border: 0px;
+        background-color: #34bfad; /* fond vert/bleu */
+        color: white;               /* texte blanc */
+        display: flex;              /* pour centrer facilement */
+        align-items: center;        /* centrage vertical */
+        justify-content: center;    /* centrage horizontal */
+        text-align: center;
+        font-weight: bold;          /* optionnel : texte en gras */
+        min-height: 100px;          /* optionnel : hauteur minimum pour que ce soit visible */
+        padding: 0px;
+    }
+
+    .remboursements-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .remboursements img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .remboursements table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .remboursements tr {
+      cursor:pointer;
+    }
+
+    .remboursements tr:hover {
+        background-color: #f0f8ff;
+    }
+
+    .remboursements td {
+      padding: 4px 0;
+    }
+
+    .remboursements td.date {
+      text-align: left;
+      width: 20%;
+    }
+
+    .remboursements td.libelle {
+      text-align: left;
+      width: 60%;
+    }
+
+    .remboursements td.montant {
+      text-align: right;
+      width: 20%;
+    }
+
+    .garanties-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .garanties img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .garanties table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .garanties tr {
+      cursor:pointer;
+    }
+
+    .garanties tr:hover {
+        background-color: #f0f8ff;
+    }
+
+    .garanties td {
+      padding: 4px 0;
+    }
+
+    .garanties td.libelle {
+      text-align: left;
+      width: 60%;
+    }
+
+    .garanties td.fleche {
+      text-align: right;
+      width: 20%;
+    }
+    /* ========================= */
+    /* Responsive Design */
+    /* ========================= */
+    @media (max-width: 1024px) {
+      /* Tablette */
+      .header {
+        grid-template-columns: 80px 1fr auto;
+        grid-template-areas:
+          "logo title logout"
+          "logo user user";
+      }
+      .header img { grid-area: logo; }
+      .header div { grid-area: title; }
+      .header button:nth-child(3) { grid-area: user; }
+      .header .logout { grid-area: logout; }
+
+      .menu {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      /* Mobile */
+      .header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .header img {
+        margin: 0 auto;
+      }
+
+      .menu {
+        grid-template-columns: 1fr;
+      }
+
+      .menu div {
+        border-bottom: 1px solid #391909;
+        border-right: none;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <script>
+    const login = sessionStorage.getItem("login");
+    const firstName = sessionStorage.getItem("firstName");
+    const lastName = sessionStorage.getItem("lastName");
+
+    window.onload = function() {
+      document.getElementById("user").innerHTML = firstName + "&nbsp;" + lastName;
+    };
+    function logout () {
+      sessionStorage.removeItem('login');
+      sessionStorage.removeItem('firstName');
+      sessionStorage.removeItem('lastName');
+
+      window.location.href='login.html';
+    }
+    </script>
+  <script type="text/javascript" src="https://cdn.c360a.salesforce.com/beacon/c360a/cbf9ea20-cd25-48d4-9a9c-2bad8ca9e94c/scripts/c360a.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Section 1 -->
+    <div class="header">
+      <img src="images/Logo-AG2R.svg" alt="Logo">
+      <div>Votre espace client</div>
+      <button id="user" class="user">Utilisateur</button>
+      <img class="logout" src="images/close.png" alt="Déconnexion" onclick="logout();">
+    </div>
+
+    <!-- Section 2 -->
+    <div class="menu">
+      <div class="active">SANTÉ</div>
+      <div class="inactive">PRÉVOYANCE</div>
+      <div class="inactive">ÉPARGNE</div>
+      <div class="inactive">RETRAITE COMPLÉMENTAIRE</div>
+      <div class="inactive">RETRAITE</div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="content">
+      <div class="cell remboursements">
+        <div class="remboursements-header">
+          <img src="images/remboursements.png" alt="Icone remboursements">
+          <span>Vos derniers remboursements</span>
+        </div>
+        <table>
+          <tr onclick="window.location.href='#';">
+            <td class="date">15/07/2025</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td class="libelle">Médecine douce</td>
+            <td class="montant">50€</td>
+          </tr>
+          <tr onclick="window.location.href='#';">
+            <td class="date">20/06/2025</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td class="libelle">Ophtalmologie</td>
+            <td class="montant">60€</td>
+          </tr>
+          <tr onclick="window.location.href='#';">
+            <td class="date">13/03/2025</td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td class="libelle">Dentaire</td>
+            <td class="montant">70€</td>
+          </tr>
+        </table>
+      </div>
+      <div class="cell garanties">
+        <div class="garanties-header">
+          <img src="images/garanties.png" alt="Icone garanties">
+          <span>Vos garanties</span>
+        </div>
+        <table>
+          <tr>
+            <td class="libelle">Dentaire</td>
+            <td class="fleche">></td>
+          </tr>
+          <tr>
+            <td class="libelle">Optique</td>
+            <td class="fleche">></td>
+          </tr>
+          <tr>
+            <td class="libelle">Hospitalisation</td>
+            <td class="fleche">></td>
+          </tr>
+        </table>
+        </div>
+      <div class="cell perso">
+        Emplacement pour personnalisation
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
